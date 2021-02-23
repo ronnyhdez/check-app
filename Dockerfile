@@ -21,7 +21,7 @@ COPY shiny-server.conf /etc/shiny-server/shiny-server.conf
 COPY . /srv/shiny-server/
 COPY shiny-server.conf /etc/shiny-server/shiny-server.conf
 
-RUN chown shiny:shiny /srv/shiny-server/www
+RUN chown shiny:shiny /srv/shiny-server/
 
 # Fix permissions in case this was deployed from Windows
 RUN chmod -R 755 /srv/shiny-server/
