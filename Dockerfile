@@ -3,7 +3,6 @@ FROM rocker/shiny:4.0.3
 RUN apt-get update && apt-get install \
   libcurl4-openssl-dev \
   libv8-dev \
-  curl -y \
   libpq-dev \
   libharfbuzz-dev \
   libfribidi-dev \
@@ -27,11 +26,7 @@ RUN R -e 'install.packages("dplyr", repos="http://cran.rstudio.com")'
 COPY . /srv/shiny-server/
 COPY shiny-server.conf /etc/shiny-server/shiny-server.conf
 
-RUN chown shiny:shiny /srv/shiny-server/
+RUN chmod -R 755 /srv/shiny-server/
 
 EXPOSE 8080
-
-USER shiny
-
-CMD ["/usr/bin/shiny-server"]
 
