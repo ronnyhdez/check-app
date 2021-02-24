@@ -7,7 +7,6 @@ server <- function(input, output, session) {
   
   # Llamar módulo en objeto para traer selecciones
   carriers <- callModule(module = seleccionador, id = "carrier_seleccionador")
-  print(carriers) # Prueba para revisar qué trae.
   
   observeEvent(
     carriers$carrier_input(), {
@@ -21,7 +20,6 @@ server <- function(input, output, session) {
   deslizadores <- callModule(module = deslizador, id = "deslizador_nuevo")
   
   # Deslizadores lo tenemos como una lista con dos funciones
-  print(deslizadores) # Para corrobar lo que viene de deslizadores
   
   observeEvent(
     (deslizadores$frec_input() | deslizadores$max_input()), {

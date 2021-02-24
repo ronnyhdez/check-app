@@ -4,14 +4,27 @@ RUN apt-get update && apt-get install \
   libcurl4-openssl-dev \
   libv8-dev \
   curl -y \
-  libpq-dev
+  libpq-dev \
+  libharfbuzz-dev \
+  libfribidi-dev \
+  libxml2-dev
 
 RUN mkdir -p /var/lib/shiny-server/bookmarks/shiny
 
+# Install remotes to manage R package versions
+RUN R -e 'install.packages("remotes", repos="http://cran.rstudio.com")'
+
 # Download and install library
-RUN R -e "install.packages(c('tm', 'SnowballC', 'wordcloud'))"
-RUN R -e "install.packages(c('RColorBrewer', 'shiny', 'shinydashboard'))"
-RUN R -e "install.packages(c('ggplot2', 'nycflights13', 'dplyr'))"
+
+RUN R -e 'remotes::install_version(package = "shiny", version = "1.6.0", dependencies = TRUE)'
+RUN R -e 'remotes::install_version(package = "tm", version = "0.7")'
+RUN R -e 'remotes::install_version(package = "SnowballC", version = "0.7.0", dependencies = TRUE)'
+RUN R -e 'remotes::install_version(package = "wordcloud", version = "2.6", dependencies = TRUE)'
+RUN R -e 'remotes::install_version(package = "RColorBrewer", version = "1.1-2", dependencies = TRUE)'
+RUN R -e 'remotes::install_version(package = "shinydashboard", version = "0.7.1", dependencies = TRUE)'
+RUN R -e 'remotes::install_version(package = "ggplot2", version = "3.3.3", dependencies = TRUE)'
+RUN R -e 'remotes::install_version(package = "nycflights13", version = "1.0.1", dependencies = TRUE)'
+RUN R -e 'remotes::install_version(package = "dplyr", version = "1.0.4", dependencies = TRUE)'
 
 # copy the app to the image COPY shinyapps /srv/shiny-server/
 COPY . /srv/shiny-server/
