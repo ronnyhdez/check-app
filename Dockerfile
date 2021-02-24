@@ -16,19 +16,15 @@ RUN R -e 'install.packages("remotes", repos="http://cran.rstudio.com")'
 
 # Download and install library
 
-RUN R -e 'remotes::install_version(package = "shiny", version = "1.6.0", dependencies = TRUE)'
-RUN R -e 'remotes::install_version(package = "tm", version = "0.7")'
-RUN R -e 'remotes::install_version(package = "SnowballC", version = "0.7.0", dependencies = TRUE)'
-RUN R -e 'remotes::install_version(package = "wordcloud", version = "2.6", dependencies = TRUE)'
-RUN R -e 'remotes::install_version(package = "RColorBrewer", version = "1.1-2", dependencies = TRUE)'
-RUN R -e 'remotes::install_version(package = "shinydashboard", version = "0.7.1", dependencies = TRUE)'
-RUN R -e 'remotes::install_version(package = "ggplot2", version = "3.3.3", dependencies = TRUE)'
-RUN R -e 'remotes::install_version(package = "nycflights13", version = "1.0.1", dependencies = TRUE)'
-RUN R -e 'remotes::install_version(package = "dplyr", version = "1.0.4", dependencies = TRUE)'
-
-# copy the app to the image COPY shinyapps /srv/shiny-server/
-COPY . /srv/shiny-server/
-COPY shiny-server.conf /etc/shiny-server/shiny-server.conf
+RUN R -e 'install.packages("shiny", repos="http://cran.rstudio.com")'
+RUN R -e 'install.packages("tm", repos="http://cran.rstudio.com")'
+RUN R -e 'install.packages("SnowballC", repos="http://cran.rstudio.com")'
+RUN R -e 'install.packages("wordcloud", repos="http://cran.rstudio.com")'
+RUN R -e 'install.packages("RColorBrewer", repos="http://cran.rstudio.com")'
+RUN R -e 'install.packages("shinydashboard", repos="http://cran.rstudio.com")'
+RUN R -e 'install.packages("ggplot2", repos="http://cran.rstudio.com")'
+RUN R -e 'install.packages("nycflights13", repos="http://cran.rstudio.com")'
+RUN R -e 'install.packages("dplyr", repos="http://cran.rstudio.com")'
 
 # copy the app to the image COPY shinyapps /srv/shiny-server/
 COPY . /srv/shiny-server/
