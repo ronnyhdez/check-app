@@ -3,6 +3,7 @@ FROM rocker/shiny:4.0.3
 RUN apt-get update && apt-get install \
   libcurl4-openssl-dev \
   libv8-dev \
+  curl -y \
   libpq-dev \
   libharfbuzz-dev \
   libfribidi-dev \
@@ -35,4 +36,3 @@ RUN chown shiny:shiny /srv/shiny-server/
 RUN chmod -R 755 /srv/shiny-server/
 
 EXPOSE 8080
-
